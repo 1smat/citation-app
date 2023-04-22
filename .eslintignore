@@ -1,0 +1,24 @@
+# Ignore built files
+/dist/*
+
+# Ignore node_modules
+/node_modules/*
+
+# Ignore any files in the build output directory
+/build/*
+
+# Ignore generated files
+/generated/*
+
+# Ignore specific files
+**/*.log
+**/*.md
+
+# files
+.eslintrc.js
+postcss.config.js
+.prettierrc.js
+babel.config.ts
+jest.config.ts
+
+*.
