@@ -20,9 +20,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue,json,md}": [
-      "prettier",
-      "lint-fix",
+    "*.{ts,vue}": [
+      "yarn run lint",
+      "yarn run prettier",
       "git add"
     ]
   },
