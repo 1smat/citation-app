@@ -16,7 +16,7 @@ onMounted(async () => {
 const fetchQuotes = async () => {
 	state.quotes = await getAllQuotes();
 
-	state.randomIndex = (Math.floor(Math.random() *(state.quotes.length)))
+	state.randomIndex = (Math.floor(Math.random()*(state.quotes.length)))
 }
 
 </script>
