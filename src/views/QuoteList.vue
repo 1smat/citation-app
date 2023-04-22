@@ -15,5 +15,5 @@ onMounted(async () => {
 
 <template>
 	<h1>Quote List</h1>
-	<QuoteCard v-for="quote in state.quotes" :quote="quote" :key="quote._id" />
+	<QuoteCard v-for="quote in state.quotes " :quote="quote" />
 </template>
