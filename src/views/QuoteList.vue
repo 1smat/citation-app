@@ -101,7 +101,7 @@
 
 <script lang="ts" setup>
 import QuoteCard from '@/components/QuoteCard.vue'
-import { getAllQuotes } from '@/services/api'
+import { getAllQuotes } from '@/services/api';
 import { IQuote } from '@/types'
 import { computed, onMounted, reactive } from 'vue'
 
