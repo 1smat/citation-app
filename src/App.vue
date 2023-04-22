@@ -5,8 +5,8 @@ import Container from './components/Layout/Container.vue'
 </script>
 
 <template>
-    <Header />
-    <Container>
-        <router-view />
-    </Container>
+  <Header />
+  <Container>
+    <router-view />
+  </Container>
 </template>

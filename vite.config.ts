@@ -1,23 +1,21 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import fs from 'fs';
+import fs from 'fs'
 
 const serverOptions = {
   https: {
     key: fs.readFileSync('./localhost.key'),
-    cert: fs.readFileSync('./localhost.crt'),
+    cert: fs.readFileSync('./localhost.crt')
   },
   proxy: {
     '/api/v1': {
       target: 'https://crudapi.co.uk',
-      changeOrigin: true,
+      changeOrigin: true
       // pathRewrite: { '^/api': '/api/v1' },
-    },
+    }
   }
 }
-
-
 
 export default defineConfig({
   server: serverOptions,
@@ -26,11 +24,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src/')
     }
-  },
+  }
 })
-
-
-
-
-
-

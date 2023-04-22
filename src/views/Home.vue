@@ -3,5 +3,5 @@ import RandomQuote from './RandomQuote.vue'
 </script>
 
 <template>
-    <RandomQuote />
+  <RandomQuote />
 </template>
