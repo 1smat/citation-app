@@ -5,6 +5,7 @@ import QuoteView from "@/views/QuoteView.vue";
 import AuthorList from "@/views/AuthorList.vue";
 import QuoteCreate from "@/views/QuoteCreate.vue";
 import RandomQuote from "@/views/RandomQuote.vue";
+import QuoteEdit from "@/views/QuoteEdit.vue";
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -26,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
 		path: "/quotes/:id",
 		name: "QuoteView",
 		component: QuoteView
+	},
+	{
+		path: "/quotes/edit/:id",
+		name: "QuoteEdit",
+		component: QuoteEdit
 	},
 	{
 		path: "/authors",

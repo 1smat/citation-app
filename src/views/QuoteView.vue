@@ -9,9 +9,7 @@ const quote = ref<IQuote>({
 	title: '',
 	author: '',
 	genre: '',
-	content: '',
-	createDate: '',
-	updateDate: '',
+	content: ''
 });
 const { params } = useRoute();
 
@@ -31,8 +29,12 @@ onMounted(() => {
 <template>
 	<section class="bg-white dark:bg-gray-900">
 		<div class="container px-6 py-10 mx-auto">
-			<h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">{{ quote.title }}</h1>
-
+			<div class="flex justify-between">
+				<h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">{{ quote.title }}
+				</h1>
+				<RouterLink :to="`/quotes/edit/${quote._uuid}`" class=" text-white px-6 py-2 bg-blue-600 rounded-md"> Edit
+				</RouterLink>
+			</div>
 			<div class="mt-8 lg:-mx-6 lg:flex lg:items-center">
 				<img class="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96"
 					src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"

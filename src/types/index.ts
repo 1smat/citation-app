@@ -4,6 +4,4 @@ export type IQuote = {
 	author: string
 	genre: string
 	content: string
-	createDate?: string
-	updateDate?: string
 }

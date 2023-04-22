@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { router } from '@/router'
-import { reactive } from '@vue/reactivity'
-import { computed } from 'vue'
-import { addQuote } from "@/services/api"
+import { onMounted, reactive } from 'vue';
+import { useRoute } from 'vue-router';
+import { getQuote } from '@/services/api';
+import { router } from '@/router';
+import { updateQuote } from "@/services/api"
 
 const quote = reactive({
 	title: '',
@@ -11,75 +12,64 @@ const quote = reactive({
 	content: ''
 })
 
-const createDisabled = computed(() => {
-	return !(quote.title && quote.author && quote.genre && quote.content)
-})
+const { params } = useRoute();
 
-const submitQuote = async () => {
-	const newQuote = Object.assign({}, quote)
-	await addQuote(newQuote)
+const fetchQuote = async () => {
+	const response = await getQuote(String(params.id));
+	console.log(response);
+	const data = await response.data;
+	Object.assign(quote, data)
+};
 
-	quote.title = ''
-	quote.author = ''
-	quote.genre = ''
-	quote.content = ''
+onMounted(() => {
+	fetchQuote();
+});
 
-	router.push("/quotes")
+const editQuote = async () => {
+	const editedQuote = Object.assign({}, quote)
+	await updateQuote(editedQuote)
+
+	// router.push("/quotes")
 }
+
 </script>
 
 <template>
-	<section class="">
-		<div class="px-6 mx-auto">
-			<div class="flex justify-center">
-				<div class="lg:w-1/2 lg:mt-0">
-					<h1 class="flex flex-col justify-center mt-4 text-2xl font-medium capitalize lg:text-3xl text-center">
-						Create Quote
-					</h1>
-					<br />
-					<form class="w-full" @submit.prevent="submitQuote">
-						<div class="relative flex items-center">
-							<input type="text"
-								class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-								placeholder="Quote Title" id="quote-title" v-model="quote.title">
+	<section class="mt-4 max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+		<h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
 
-						</div>
+		<form @submit.prevent="editQuote">
+			<div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+				<div>
+					<label class="text-gray-700 dark:text-gray-200" for="title">Title</label>
+					<input id="title" type="text" v-model="quote.title"
+						class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+				</div>
 
-						<div class="relative flex items-center mt-4">
-							<input type="text"
-								class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-								placeholder="Quote Author" id="quote-author" v-model="quote.author">
-						</div>
-						<div class="relative flex items-center mt-4">
-							<input type="text"
-								class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-								placeholder="Quote Genre" id="quote-genre" v-model="quote.genre">
-						</div>
+				<div>
+					<label class="text-gray-700 dark:text-gray-200" for="author">Author</label>
+					<input id="author" type="text" v-model="quote.author"
+						class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+				</div>
 
-						<div class="relative flex items-center mt-4">
-							<textarea
-								class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-								placeholder="Quote Content" rows="4" id="quote-content" v-model="quote.content" />
-						</div>
+				<div>
+					<label class="text-gray-700 dark:text-gray-200" for="content">Content</label>
 
-						<div class="mt-8 md:flex md:items-center justify-center">
-							<button :class="[
-									'w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize rounded-lg transition-colors duration-300',
-									createDisabled ? 'bg-gray-500 cursor-not-allowed opacity-50' : 'bg-blue-500 hover:bg-blue-400'
-								]" :disabled="createDisabled" type="submit">
-								{{ createDisabled ? 'Creating...' : 'Create' }}
-							</button>
+					<textarea id="content" type="content" v-model="quote.content"
+						class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"></textarea>
+				</div>
 
-						</div>
-					</form>
+				<div>
+					<label class="text-gray-700 dark:text-gray-200" for="genre">Genre</label>
+					<input id="genre" type="genre" v-model="quote.genre"
+						class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+					<div class="flex justify-end mt-6">
+						<button type="submit"
+							class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+					</div>
 				</div>
 			</div>
 
-			<div class="mt-8 md:mt-24 sm:flex sm:items-center">
-				<!-- <h3 class="text-blue-500 dark:text-blue-400 sm:w-1/2">Social networks</h3> -->
-
-
-			</div>
-		</div>
+		</form>
 	</section>
 </template>

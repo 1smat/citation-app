@@ -32,3 +32,14 @@ export const addQuote = async (quote: IQuote) => {
 };
 
 
+export const updateQuote = async (quote: IQuote) => {
+	try {
+		const response = await api.put(`/quotes`, [quote]);
+		return response;
+	} catch (error) {
+		console.error(error);
+		throw new Error('Failed to add quote');
+	}
+};
+
+
