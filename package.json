@@ -8,28 +8,22 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "lint": "eslint . --ext .ts,.vue",
-    "prettier": "prettier --write",
     "test": "jest",
-    "lint-staged": "lint-staged"
+    "prettier": "prettier --write .",
+    "lint": "eslint --ext .ts,.tsx,.vue src",
+    "lint-fix": "eslint --fix --ext .ts,.tsx,.vue src",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run lint-staged",
-      "pre-push": "yarn run test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "yarn lint",
-      "yarn prettier",
-      "git add ."
-    ],
-    "*.vue": [
-      "yarn lint",
-      "yarn prettier",
-      "git add ."
+    "*.{js,jsx,ts,tsx,vue,json,md}": [
+      "prettier",
+      "lint-fix",
+      "git add"
     ]
   },
   "dependencies": {
@@ -41,9 +35,14 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.13",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.11.0",
     "http-proxy-middleware": "^2.0.6",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
