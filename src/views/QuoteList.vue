@@ -14,6 +14,7 @@ onMounted(async () => {
 </script>
 
 <template>
-	<h1>Quote List</h1>
-	<QuoteCard v-for="quote in state.quotes " :quote="quote" />
+	<div class="grid md:grid-cols-2 2xl:grid-cols-3 gap-1 px-2">
+		<QuoteCard v-for="quote in state.quotes " :quote="quote" />
+	</div>
 </template>

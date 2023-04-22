@@ -1,10 +1,9 @@
 <script lang="ts" setup>
+import QuoteList from './QuoteList.vue';
+
 
 </script>
 
 <template>
-	<h1>Home View</h1>
-	<section>
-		<RouterLink to="/quotes"> quotes </RouterLink>
-	</section>
+	<QuoteList />
 </template>

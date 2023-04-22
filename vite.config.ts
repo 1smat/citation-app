@@ -1,27 +1,18 @@
-import { defineConfig, createServer, ViteDevServer } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import fs from 'fs';
-import { createProxyMiddleware } from 'http-proxy-middleware';
-
-const proxyConfig = {
-  target: 'https://crudapi.co.uk',
-  changeOrigin: true,
-};
-const apiProxy = createProxyMiddleware(proxyConfig);
-
 
 const serverOptions = {
   https: {
     key: fs.readFileSync('./localhost.key'),
     cert: fs.readFileSync('./localhost.crt'),
   },
-  // middleware: [apiProxy],
   proxy: {
-    '/api': {
+    '/api/v1': {
       target: 'https://crudapi.co.uk',
       changeOrigin: true,
-      pathRewrite: { '^/api': '/api/v1' },
+      // pathRewrite: { '^/api': '/api/v1' },
     },
   }
 }

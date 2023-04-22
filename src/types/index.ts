@@ -1,5 +1,5 @@
 export type IQuote = {
-	_id?: string
+	_uuid?: string
 	title: string
 	author: string
 	genre: string

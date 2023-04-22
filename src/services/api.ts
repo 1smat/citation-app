@@ -1,4 +1,5 @@
 import api from '@/constants/api';
+import { IQuote } from '@/types';
 
 export const getAllQuotes = async () => {
 	try {
@@ -13,10 +14,20 @@ export const getAllQuotes = async () => {
 export const getQuote = async (id: string) => {
 	try {
 		const response = await api.get(`/quotes/${id}`);
-		return response.data;
+		return response;
 	} catch (error) {
 		console.error(error);
 		throw new Error('Failed to fetch quote');
+	}
+};
+
+export const addQuote = async (quote: IQuote) => {
+	try {
+		const response = await api.post(`/quotes`, [quote]);
+		return response;
+	} catch (error) {
+		console.error(error);
+		throw new Error('Failed to add quote');
 	}
 };
 
