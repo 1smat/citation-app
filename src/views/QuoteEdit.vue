@@ -6,6 +6,7 @@ import { router } from '@/router';
 import { updateQuote } from "@/services/api"
 
 const quote = reactive({
+	_uuid: '',
 	title: '',
 	author: '',
 	genre: '',
@@ -29,7 +30,7 @@ const editQuote = async () => {
 	const editedQuote = Object.assign({}, quote)
 	await updateQuote(editedQuote)
 
-	// router.push("/quotes")
+	router.push(`/quotes/${quote._uuid}`)
 }
 
 </script>

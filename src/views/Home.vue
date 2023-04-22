@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import QuoteList from './QuoteList.vue';
+import RandomQuote from './RandomQuote.vue';
 
 
 </script>
 
 <template>
-	<QuoteList />
+	<RandomQuote />
 </template>
