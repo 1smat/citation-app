@@ -9,12 +9,13 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
+    "pre-commit": "pretty-quick --staged",
     "lint": "eslint . --ext .ts,.vue",
     "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "yarn pre-commit",
       "pre-push": "yarn run test"
     }
   },
