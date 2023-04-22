@@ -1,0 +1,13 @@
+/node_modules
+.vscode
+
+package.json
+package-lock.json
+yarn.lock
+
+.eslintrc
+.gitignore
+
+tsconfig.json
+.tsconfig.node.json
+vite.config.tsconfig
