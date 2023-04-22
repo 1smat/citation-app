@@ -30,6 +30,11 @@
 							class="w-full px-3 py-2 text-gray-700 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
 							placeholder="Filter by author" v-model="state.authorFilter">
 					</div>
+					<div class="relative mr-2">
+						<input type="text"
+							class="w-full px-3 py-2 text-gray-700 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+							placeholder="Filter by genre" v-model="state.genreFilter">
+					</div>
 					<div class="relative">
 						<input type="text"
 							class="w-full px-3 py-2 text-gray-700 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -55,6 +60,7 @@ import { computed, onMounted, reactive } from "vue";
 interface State {
 	quotes: IQuote[];
 	authorFilter: string;
+	genreFilter: string;
 	contentFilter: string;
 	isOpen: boolean
 }
@@ -64,7 +70,8 @@ const state = reactive<State>({
 	isOpen: false,
 	quotes: [],
 	authorFilter: "",
-	contentFilter: ""
+	contentFilter: "",
+	genreFilter: ""
 });
 
 onMounted(async () => {
@@ -75,7 +82,9 @@ const filteredQuotes = computed(() => {
 	return state.quotes.filter(
 		(quote) =>
 			quote.author.toLowerCase().includes(state.authorFilter.toLowerCase()) &&
+			quote.genre.toLowerCase().includes(state.genreFilter.toLowerCase()) &&
 			quote.content.toLowerCase().includes(state.contentFilter.toLowerCase())
+
 	);
 });
 
