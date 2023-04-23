@@ -1,11 +1,3 @@
-<script lang="ts" setup>
-import { routes } from '@/router'
-import { reactive } from 'vue'
-
-const state = reactive({
-  isOpen: false
-})
-</script>
 <template>
   <nav
     x-data="{ isOpen: false }"
@@ -103,3 +95,12 @@ const state = reactive({
     </div>
   </nav>
 </template>
+
+<script lang="ts" setup>
+import { routes } from '@/router'
+import { reactive } from 'vue'
+
+const state = reactive({
+  isOpen: false
+})
+</script>

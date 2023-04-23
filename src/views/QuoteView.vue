@@ -1,40 +1,3 @@
-<script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { IQuote } from '@/types'
-import { deleteQuote, getQuote } from '@/services/api'
-import { router } from '@/router'
-import { format } from '@/services/utils'
-
-const quote = ref<IQuote>({
-  _uuid: '',
-  title: '',
-  author: '',
-  genre: '',
-  content: '',
-  _created: 0,
-  _modified: 0
-})
-const { params } = useRoute()
-
-const fetchQuote = async () => {
-  const response = await getQuote(String(params.id))
-  const data = await response.data
-  quote.value = data
-}
-
-const removeQuote = async () => {
-  if (confirm('Are you sure delete quote?')) {
-    await deleteQuote(String(params.id))
-    router.push('/quotes')
-  }
-}
-
-onMounted(() => {
-  fetchQuote()
-})
-</script>
-
 <template>
   <section class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-10 mx-auto">
@@ -106,3 +69,40 @@ onMounted(() => {
     </div>
   </section>
 </template>
+
+<script lang="ts" setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { IQuote } from '@/types'
+import { deleteQuote, getQuote } from '@/services/api'
+import { router } from '@/router'
+import { format } from '@/services/utils'
+
+const quote = ref<IQuote>({
+  _uuid: '',
+  title: '',
+  author: '',
+  genre: '',
+  content: '',
+  _created: 0,
+  _modified: 0
+})
+const { params } = useRoute()
+
+const fetchQuote = async () => {
+  const response = await getQuote(String(params.id))
+  const data = await response.data
+  quote.value = data
+}
+
+const removeQuote = async () => {
+  if (confirm('Are you sure delete quote?')) {
+    await deleteQuote(String(params.id))
+    router.push('/quotes')
+  }
+}
+
+onMounted(() => {
+  fetchQuote()
+})
+</script>

@@ -1,36 +1,3 @@
-<script lang="ts" setup>
-import { router } from '@/router'
-import { reactive } from '@vue/reactivity'
-import { computed } from 'vue'
-import { addQuote } from '@/services/api'
-
-const quote = reactive({
-  _uuid: '',
-  title: '',
-  author: '',
-  genre: '',
-  content: '',
-  _created: 0,
-  _modified: 0
-})
-
-const createDisabled = computed(() => {
-  return !(quote.title && quote.author && quote.genre && quote.content)
-})
-
-const submitQuote = async () => {
-  const newQuote = Object.assign({}, quote)
-  await addQuote(newQuote)
-
-  quote.title = ''
-  quote.author = ''
-  quote.genre = ''
-  quote.content = ''
-
-  router.push('/quotes')
-}
-</script>
-
 <template>
   <section class="">
     <div class="px-6 mx-auto">
@@ -106,3 +73,36 @@ const submitQuote = async () => {
     </div>
   </section>
 </template>
+
+<script lang="ts" setup>
+import { router } from '@/router'
+import { reactive } from '@vue/reactivity'
+import { computed } from 'vue'
+import { addQuote } from '@/services/api'
+
+const quote = reactive({
+  _uuid: '',
+  title: '',
+  author: '',
+  genre: '',
+  content: '',
+  _created: 0,
+  _modified: 0
+})
+
+const createDisabled = computed(() => {
+  return !(quote.title && quote.author && quote.genre && quote.content)
+})
+
+const submitQuote = async () => {
+  const newQuote = Object.assign({}, quote)
+  await addQuote(newQuote)
+
+  quote.title = ''
+  quote.author = ''
+  quote.genre = ''
+  quote.content = ''
+
+  router.push('/quotes')
+}
+</script>

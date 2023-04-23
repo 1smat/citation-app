@@ -1,24 +1,3 @@
-<script lang="ts" setup>
-import QuoteCard from '@/components/QuoteCard.vue'
-import { getAllQuotes } from '@/services/api'
-import { onMounted, reactive } from 'vue'
-
-const state = reactive({
-  quotes: [],
-  randomIndex: 0
-})
-
-onMounted(async () => {
-  fetchQuotes()
-})
-
-const fetchQuotes = async () => {
-  state.quotes = await getAllQuotes()
-
-  state.randomIndex = Math.floor(Math.random() * state.quotes.length)
-}
-</script>
-
 <template>
   <div class="flex gap-3.5 flex-col">
     <QuoteCard :quote="Object.assign({}, state.quotes[state.randomIndex])" />
@@ -45,3 +24,24 @@ const fetchQuotes = async () => {
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import QuoteCard from '@/components/Common/QuoteCard.vue'
+import { getAllQuotes } from '@/services/api'
+import { onMounted, reactive } from 'vue'
+
+const state = reactive({
+  quotes: [],
+  randomIndex: 0
+})
+
+onMounted(async () => {
+  fetchQuotes()
+})
+
+const fetchQuotes = async () => {
+  state.quotes = await getAllQuotes()
+
+  state.randomIndex = Math.floor(Math.random() * state.quotes.length)
+}
+</script>

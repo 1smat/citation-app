@@ -1,41 +1,3 @@
-<script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
-import { useRoute } from 'vue-router'
-import { getQuote } from '@/services/api'
-import { router } from '@/router'
-import { updateQuote } from '@/services/api'
-
-const quote = reactive({
-  _uuid: '',
-  title: '',
-  author: '',
-  genre: '',
-  content: '',
-  _created: 0,
-  _modified: 0
-})
-
-const { params } = useRoute()
-
-const fetchQuote = async () => {
-  const response = await getQuote(String(params.id))
-  console.log(response)
-  const data = await response.data
-  Object.assign(quote, data)
-}
-
-onMounted(() => {
-  fetchQuote()
-})
-
-const editQuote = async () => {
-  const editedQuote = Object.assign({}, quote)
-  await updateQuote(editedQuote)
-
-  router.push(`/quotes/${quote._uuid}`)
-}
-</script>
-
 <template>
   <section
     class="mt-4 max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800"
@@ -106,3 +68,41 @@ const editQuote = async () => {
     </form>
   </section>
 </template>
+
+<script lang="ts" setup>
+import { onMounted, reactive } from 'vue'
+import { useRoute } from 'vue-router'
+import { getQuote } from '@/services/api'
+import { router } from '@/router'
+import { updateQuote } from '@/services/api'
+
+const quote = reactive({
+  _uuid: '',
+  title: '',
+  author: '',
+  genre: '',
+  content: '',
+  _created: 0,
+  _modified: 0
+})
+
+const { params } = useRoute()
+
+const fetchQuote = async () => {
+  const response = await getQuote(String(params.id))
+  console.log(response)
+  const data = await response.data
+  Object.assign(quote, data)
+}
+
+onMounted(() => {
+  fetchQuote()
+})
+
+const editQuote = async () => {
+  const editedQuote = Object.assign({}, quote)
+  await updateQuote(editedQuote)
+
+  router.push(`/quotes/${quote._uuid}`)
+}
+</script>
