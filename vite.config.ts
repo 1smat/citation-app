@@ -11,10 +11,11 @@ const serverOptions = {
   proxy: {
     '/api/v1': {
       target: 'https://crudapi.co.uk',
-      changeOrigin: true
-      // pathRewrite: { '^/api': '/api/v1' },
+      changeOrigin: true,
+      pathRewrite: { '^/api': '/api/v1' }
     }
-  }
+  },
+  port: 3000
 }
 
 export default defineConfig({

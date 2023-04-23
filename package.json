@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "start": "serve ./dist",
     "preview": "vite preview",
     "test": "jest --watch",
     "postinstall": "husky install",
