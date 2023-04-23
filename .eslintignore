@@ -14,8 +14,6 @@
 **/*.log
 **/*.md
 
-src/App.vue
-
 # files
 ./.eslintrc.js
 ./postcss.config.js
