@@ -42,40 +42,40 @@ const submitQuote = async () => {
           <form class="w-full" @submit.prevent="submitQuote">
             <div class="relative flex items-center">
               <input
+                id="quote-title"
+                v-model="quote.title"
                 type="text"
                 class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Quote Title"
-                id="quote-title"
-                v-model="quote.title"
               />
             </div>
 
             <div class="relative flex items-center mt-4">
               <input
+                id="quote-author"
+                v-model="quote.author"
                 type="text"
                 class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Quote Author"
-                id="quote-author"
-                v-model="quote.author"
               />
             </div>
             <div class="relative flex items-center mt-4">
               <input
+                id="quote-genre"
+                v-model="quote.genre"
                 type="text"
                 class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Quote Genre"
-                id="quote-genre"
-                v-model="quote.genre"
               />
             </div>
 
             <div class="relative flex items-center mt-4">
               <textarea
+                id="quote-content"
+                v-model="quote.content"
                 class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Quote Content"
                 rows="4"
-                id="quote-content"
-                v-model="quote.content"
               />
             </div>
 

@@ -2,14 +2,18 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { IQuote } from '@/types'
-import { getQuote } from '@/services/api'
+import { deleteQuote, getQuote } from '@/services/api'
+import { router } from '@/router'
+import { format } from '@/services/utils'
 
 const quote = ref<IQuote>({
   _uuid: '',
   title: '',
   author: '',
   genre: '',
-  content: ''
+  content: '',
+  _created: 0,
+  _modified: 0
 })
 const { params } = useRoute()
 
@@ -17,6 +21,13 @@ const fetchQuote = async () => {
   const response = await getQuote(String(params.id))
   const data = await response.data
   quote.value = data
+}
+
+const removeQuote = async () => {
+  if (confirm('Are you sure delete quote?')) {
+    await deleteQuote(String(params.id))
+    router.push('/quotes')
+  }
 }
 
 onMounted(() => {
@@ -28,17 +39,36 @@ onMounted(() => {
   <section class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-10 mx-auto">
       <div class="flex justify-between">
-        <h1
-          class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
-        >
-          {{ quote.title }}
-        </h1>
-        <RouterLink
-          :to="`/quotes/edit/${quote._uuid}`"
-          class="text-white px-6 py-2 bg-blue-600 rounded-md"
-        >
-          Edit
-        </RouterLink>
+        <div class="flex items-center gap-2">
+          <h1
+            class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
+          >
+            {{ quote.title }}
+          </h1>
+          <h6 class="text-white">
+            <span class="text-blue-500">Created:</span>
+            {{ format(quote._created) }}
+          </h6>
+          <h6 class="text-white">
+            <span class="text-blue-500">Modified: </span>
+            {{ format(quote._modified) }}
+          </h6>
+        </div>
+        <div class="flex gap-2">
+          <RouterLink
+            :to="`/quotes/edit/${quote._uuid}`"
+            class="text-white px-6 py-2 bg-blue-600 rounded-md"
+          >
+            Edit
+          </RouterLink>
+          <button
+            type="button"
+            @click="removeQuote"
+            class="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+          >
+            <span class="mx-1">Delete</span>
+          </button>
+        </div>
       </div>
       <div class="mt-8 lg:-mx-6 lg:flex lg:items-center">
         <img
@@ -48,11 +78,11 @@ onMounted(() => {
         />
 
         <div class="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6">
-          <p class="text-sm text-blue-500 uppercase">
+          <p class="text-lg text-blue-500 uppercase">
             Genre : {{ quote.genre }}
           </p>
 
-          <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
+          <p class="mt-3 text-2xl text-gray-300">
             {{ quote.content }}
           </p>
 
@@ -66,7 +96,7 @@ onMounted(() => {
             />
 
             <div class="mx-4">
-              <h1 class="text-sm text-gray-700 dark:text-gray-200">
+              <h1 class="text-2xl text-gray-200">
                 {{ quote.author }}
               </h1>
             </div>

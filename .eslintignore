@@ -14,11 +14,12 @@
 **/*.log
 **/*.md
 
-# files
-.eslintrc.js
-postcss.config.js
-.prettierrc.js
-babel.config.ts
-jest.config.ts
+src/App.vue
 
-*.
+# files
+./.eslintrc.js
+./postcss.config.js
+./.prettierrc.js
+./babel.config.ts
+./jest.config.ts
+./tailwind.config.js

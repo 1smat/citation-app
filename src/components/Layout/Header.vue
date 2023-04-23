@@ -17,10 +17,10 @@ const state = reactive({
         <div class="flex lg:hidden md:hidden">
           <button
             x-cloak
-            @click="state.isOpen = !state.isOpen"
             type="button"
             class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
             aria-label="toggle menu"
+            @click="state.isOpen = !state.isOpen"
           >
             <svg
               v-show="!state.isOpen"
@@ -86,13 +86,14 @@ const state = reactive({
 
           <RouterLink
             v-for="route in routes"
-            :to="route.path"
             v-show="
               route.name !== 'Home' &&
               route.name !== 'QuoteView' &&
               route.name !== 'RandomQuote' &&
               route.name !== 'QuoteEdit'
             "
+            :key="route.path"
+            :to="route.path"
             class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2 flex items-center justify-between"
           >
             {{ route.name }}

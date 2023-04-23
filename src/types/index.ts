@@ -4,4 +4,6 @@ export type IQuote = {
   author: string
   genre: string
   content: string
+  _created: number
+  _modified: number
 }

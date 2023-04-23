@@ -1,12 +1,11 @@
 module.exports = {
 	extends: [
-	  'plugin:vue/vue3-recommended',
-	  '@vue/typescript/recommended',
-	  'prettier'
+		'plugin:vue/vue3-recommended',
+		'@vue/typescript/recommended',
+		'prettier'
 	],
 	plugins: ['prettier'],
 	rules: {
-	  'prettier/prettier': 'error'
+		'prettier/prettier': 'error'
 	}
-  }
-  
+}

@@ -7,13 +7,13 @@ export const getAllQuotes = async () => {
     return response.data.items
   } catch (error) {
     console.error(error)
-    throw new Error('Failed to fetch quote')
+    throw new Error('Failed to fetch quotes')
   }
 }
 
-export const getQuote = async (id: string) => {
+export const getQuote = async (_uuid: string) => {
   try {
-    const response = await api.get(`/quotes/${id}`)
+    const response = await api.get(`/quotes/${_uuid}`)
     return response
   } catch (error) {
     console.error(error)
@@ -23,7 +23,7 @@ export const getQuote = async (id: string) => {
 
 export const addQuote = async (quote: IQuote) => {
   try {
-    const response = await api.post(`/quotes`, [quote])
+    const response = await api.post(`/quotes`, quote)
     return response
   } catch (error) {
     console.error(error)
@@ -33,10 +33,20 @@ export const addQuote = async (quote: IQuote) => {
 
 export const updateQuote = async (quote: IQuote) => {
   try {
-    const response = await api.put(`/quotes`, [quote])
+    const response = await api.put(`/quotes/${quote._uuid}`, quote)
     return response
   } catch (error) {
     console.error(error)
-    throw new Error('Failed to add quote')
+    throw new Error('Failed to update quote')
+  }
+}
+
+export const deleteQuote = async (_uuid: string) => {
+  try {
+    const response = await api.delete(`/quotes/${_uuid}`)
+    return response
+  } catch (error) {
+    console.error(error)
+    throw new Error('Failed to delete quote')
   }
 }
