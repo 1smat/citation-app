@@ -32,7 +32,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/components/BaseButton.test.js",
+    "src/components/QuoteCard.test.js"
   ],
   "references": [
     {

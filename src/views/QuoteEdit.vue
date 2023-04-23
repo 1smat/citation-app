@@ -10,7 +10,9 @@ const quote = reactive({
   title: '',
   author: '',
   genre: '',
-  content: ''
+  content: '',
+  _created: 0,
+  _modified: 0
 })
 
 const { params } = useRoute()

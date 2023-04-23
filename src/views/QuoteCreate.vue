@@ -5,10 +5,13 @@ import { computed } from 'vue'
 import { addQuote } from '@/services/api'
 
 const quote = reactive({
+  _uuid: '',
   title: '',
   author: '',
   genre: '',
-  content: ''
+  content: '',
+  _created: 0,
+  _modified: 0
 })
 
 const createDisabled = computed(() => {
