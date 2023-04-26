@@ -16,8 +16,8 @@ COPY . .
 # Build the app for production
 # RUN yarn run build
 
-Set port
-EXPOSE 3000
+# Set port
+# EXPOSE 3000
 
 # Start the app
 CMD [ "yarn", "run", "dev"]
