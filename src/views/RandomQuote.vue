@@ -3,7 +3,9 @@
     <div v-if="state.quotes.length">
       <QuoteCard :quote="Object.assign({}, state.quotes[state.randomIndex])" />
     </div>
-    <div v-else>Loading...</div>
+    <div v-else>
+      <Skeleton />
+    </div>
 
     <div>
       <button
@@ -33,6 +35,7 @@
 import QuoteCard from '@/components/Common/QuoteCard.vue'
 import { getAllQuotes } from '@/services/api'
 import { onMounted, reactive } from 'vue'
+import Skeleton from '@/components/Common/Skeleton.vue'
 
 const state = reactive({
   quotes: [],
