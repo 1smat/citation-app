@@ -14,13 +14,14 @@ RUN yarn install
 COPY . .
 
 # Build the app for production
-RUN yarn run build
+# RUN yarn run build
 
-# Set port
+Set port
 EXPOSE 3000
 
 # Start the app
-CMD [ "yarn", "run", "start"]
+CMD [ "yarn", "run", "dev"]
+# test mode
 
 # cheatsheet
 # docker build -t quotes-app .
