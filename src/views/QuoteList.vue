@@ -93,7 +93,15 @@
   <div
     class="grid md:grid-cols-2 2xl:grid-cols-3 gap-1 px-2 justify-items-center"
   >
+    <Skeleton v-if="filteredQuotes.length < 1" />
+    <Skeleton v-if="filteredQuotes.length < 1" />
+    <Skeleton v-if="filteredQuotes.length < 1" />
+    <Skeleton v-if="filteredQuotes.length < 1" />
+    <Skeleton v-if="filteredQuotes.length < 1" />
+    <Skeleton v-if="filteredQuotes.length < 1" />
+
     <QuoteCard
+      v-else
       v-for="quote in filteredQuotes"
       :key="quote._uuid"
       :quote="quote"
@@ -106,6 +114,7 @@ import QuoteCard from '@/components/Common/QuoteCard.vue'
 import { getAllQuotes } from '@/services/api'
 import { IQuote } from '@/types'
 import { computed, onMounted, reactive } from 'vue'
+import Skeleton from '@/components/Common/Skeleton.vue'
 
 interface State {
   quotes: IQuote[]
